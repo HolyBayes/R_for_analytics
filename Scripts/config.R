@@ -6,3 +6,4 @@
 # Russian - Windows
 
 locale <- "Russian"
+GRAPHICS_EXPORT_DIR <- "./Graphics"
