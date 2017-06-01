@@ -1,5 +1,6 @@
 source('./Scripts/Blocks/io_block.R', echo = F)
 source('./Scripts/Blocks/data_analysis_block.R', echo = F)
+source('./Scripts/config.R', echo=F)
 
 not_defined <- 'Not defined'
 
@@ -12,7 +13,7 @@ start_menu <- function(){
       user_action,
       # Instruction
       {
-        instruction <- paste0(getwd(), insruction_path)
+        instruction <- paste0(getwd(), INSTRUCTION_PATH)
         shell.exec(instruction)
       },
       # Data upload block
@@ -35,7 +36,7 @@ main_menu <- function(data){
       user_action,
       # Instruction
       {
-        instruction <- paste0(getwd(), insruction_path)
+        instruction <- paste0(getwd(), INSTRUCTION_PATH)
         shell.exec(instruction)
       },
       # Data analysis block

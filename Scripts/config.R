@@ -6,4 +6,6 @@
 # Russian - Windows
 
 locale <- "Russian"
-GRAPHICS_EXPORT_DIR <- "./Graphics"
+GRAPHICS_EXPORT_DIR <- "./Graphics/"
+MODELS_EXPORT_DIR <- "./Output/"
+INSTRUCTION_PATH <- "./Notes/README.md"

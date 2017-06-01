@@ -3,7 +3,7 @@ plot_boxplot <- function(data, horizontal, first_column, second_column, title = 
   with(data, boxplot(columns, data = data, main = title, horizontal = horizontal))
 }
 
-plot_barplot = function(data, column, horizontal, xlabel, ylabel, title){
+plot_barplot = function(data, horizontal, column, xlabel, ylabel, title){
   with(data,
        {counts <- table(data[[column]])
        barplot(counts, main = title, xlab = xlabel, ylab = ylabel, horiz = horizontal)
