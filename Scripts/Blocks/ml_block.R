@@ -61,6 +61,46 @@ regression_block <- function(data, is_expert) {
   regression_export_block(fit, is_expert)
 }
 
+clusters_vizualization_block <- function(data, clusters, is_expert) {
+  columns <- c(colnames(data))
+  if (length(columns) != 2) print("Dlya vizualizacii dolzhno byt' 2 kolonki!")
+  else {
+    first_component <- columns[0]
+    second_component <- columns[1]
+    title <- 'Clusterization'
+    xlabel <- first_component
+    ylabel <- second_component
+    if (is_expert && (winDialog('yesno', "Vy hotite pereopredelit' podpisi?") == "YES")) {
+      title <- winDialogString('Vvedite nazvanie zagolovka: ', default = title)
+      xlabel <- winDialogString("Vvedite podpis' k X: ", default = xlabel)
+      ylabel <- winDialogString("Vvedite podpis' k Y: ", default = ylabel)
+    }
+    plot(data, col = clusters$cluster, xlab=xlabel, ylab=ylabel, main=title)    
+  }
+}
+
 cluster_block <- function(data, is_expert) {
-  
+  clusters_cnt <- strtoi(winDialogString('Vvedite chislo clustesov: ', default = '2'))
+  columns <- c()
+  if (is_expert) {
+    i <- 0
+    while((i==0) || (winDialog('yesno', 'Vy hotite vvesti esche odin priznak dlya clusterizacii?') == "YES")) {
+      i <- i + 1
+      new_column <- columns_selection_block(data, 'Vyberite noviy priznak')
+      columns <- append(columns, new_column)
+    }
+  } else {
+    first_column <- columns_selection_block(data, 'Vyberite perviy priznak dlya clusterizacii')
+    second_column <- columns_selection_block(data, 'Vyberite vtoroy priznak dlya clusterizacii')
+    columns <- c(first_column, second_column)
+  }
+  clusters <- clusterize(data, columns, clusters_cnt)
+  if (winDialog('yesno', "Vy hotite visualizirovat' clusterizaciyu ?") == "YES") {
+    if (is_expert) {
+      first_column <- columns_selection_block(data, 'Vyberite pervuyu glavnuyu komponentu dlya vizualizacii: ')
+      second_column <- columns_selection_block(data, 'Vyberite vtoruyu glavnuyu komponentu dlya vizualizacii: ')
+    }
+    clusters_vizualization_block(data[, c(first_column, second_column)], clusters, is_expert)
+    export_block(is_expert)
+  } 
 }

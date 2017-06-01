@@ -1,5 +1,5 @@
-cluster <- function(data, first_feature, second_feature, clusters_cnt) {
-  x <- data[,c(first_feature, second_feature)]
+clusterize <- function(data, columns, clusters_cnt) {
+  x <- data[, columns]
   clusters <- kmeans(x, clusters_cnt)
   return(clusters)
 }
