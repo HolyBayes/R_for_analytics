@@ -1,0 +1,8 @@
+
+Call:
+lm(formula = columns, data = states)
+
+Coefficients:
+(Intercept)    timestamp  
+ -7.594e+05    5.453e-04  
+
